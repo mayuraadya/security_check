@@ -7,8 +7,17 @@ runs:
     - name: Checkout Code for scanning
       uses: actions/checkout@v2
     - name: Snyk Code Scanning
-      uses: snyk/actions/python-3.8@master
-      continue-on-error: true # To make sure that SARIF upload gets called
-        with:
-          args: --sarif-file-output=snyk.sarif
-          token: ${{ secrets.SNYK_TOKEN }}
+    run: |
+      echo "Running Snyk Code Scanning"
+      echo "Snyk Code Scanning is not yet available for in teh QMS Pipeline
+      echo "Please wait for the announcement"
+      echo "https://snyk.io"
+      echo "
+    shell: bash
+# Waiting for Snyk commercial and Authorization TBD
+#    - name: Snyk Code Scanning
+#      uses: snyk/actions/python-3.8@master
+#      continue-on-error: true # To make sure that SARIF upload gets called
+#        with:
+#          args: --sarif-file-output=snyk.sarif
+#          token: ${{ secrets.SNYK_TOKEN }}
