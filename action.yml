@@ -9,10 +9,9 @@ runs:
     - name: Snyk Code Scanning
     run: |
       echo "Running Snyk Code Scanning"
-      echo "Snyk Code Scanning is not yet available for in teh QMS Pipeline
+      echo "Snyk Code Scanning is not yet available for in teh QMS Pipeline"
       echo "Please wait for the announcement"
       echo "https://snyk.io"
-      echo "
     shell: bash
 # Waiting for Snyk commercial and Authorization TBD
 #    - name: Snyk Code Scanning
