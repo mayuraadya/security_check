@@ -1,0 +1,14 @@
+name: 'Code Scanning'
+description: 'Perform Snyk Code Scanning'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout Code for scanning
+      uses: actions/checkout@v2
+    - name: Snyk Code Scanning
+      uses: snyk/actions/python-3.8@master
+      continue-on-error: true # To make sure that SARIF upload gets called
+        with:
+          args: --sarif-file-output=snyk.sarif
+          token: ${{ secrets.SNYK_TOKEN }}
