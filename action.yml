@@ -14,18 +14,22 @@ runs:
   steps:
     - uses: actions/checkout@v4
     - name: Authenticate Snyk
+      shell: bash
       env:
         SNYK_TOKEN: ${{ inputs.SnykToken }}
       run: npx snyk auth $SNYK_TOKEN
     - name: Install Snyk Tools
+      shell: bash
       run: npm install snyk-to-html -g
     - uses: snyk/actions/setup@master
     - name: Snyk Test
+      shell: bash
       run: snyk code test
       continue-on-error: true # To make sure that SARIF upload gets called
 #        env:
 #          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     - name: Snyk Report
+      shell: bash
       run: snyk code test --json | snyk-to-html -o results-code-${{ inputs.Pipeline_Run }}.html
     - name: Upload Code Scanning Result
       uses: actions/upload-artifact@v4
