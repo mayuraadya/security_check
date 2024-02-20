@@ -4,6 +4,11 @@ secrets:
     description: 'Snyk API Token'
     required: true
     default: 'Missing'
+inputs:
+  Pipeline_Run:
+    description: 'Pipeline Run'
+    required: true
+
 on: 
   push:
   workflow_dispatch:
@@ -25,9 +30,9 @@ jobs:
 #        env:
 #          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Snyk Report
-        run: snyk code test --json | snyk-to-html -o results-code-${{ github.run_id }}.html
+        run: snyk code test --json | snyk-to-html -o results-code-${{ inputs.Pipeline_Run }}.html
       - name: Upload Code Scanning Result
         uses: actions/upload-artifact@v4
         with:
           name: snyk-scanning-results
-          path: results-code-${{ github.run_id }}.html
+          path: results-code-${{ inputs.Pipeline_Run }}.html
