@@ -1,5 +1,9 @@
 name: Code Analysis using Snyk
-
+inputs:
+  SnykToken:
+    description: 'Snyk API Token'
+    required: true
+    default: 'Missing'
 on: 
   push:
   workflow_dispatch:
@@ -9,15 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Authenticate Snyk
-        run: npx snyk auth ${{ secrets.SNYK_TOKEN }}
+        run: npx snyk auth ${{ SnykToken }}
       - name: Install Snyk Tools
         run: npm install snyk-to-html -g
       - uses: snyk/actions/setup@master
       - name: Snyk Test
         run: snyk code test
         continue-on-error: true # To make sure that SARIF upload gets called
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+#        env:
+#          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Snyk Report
         run: snyk code test --json | snyk-to-html -o results-code-${{ github.run_id }}.html
       - name: Upload Code Scanning Result
