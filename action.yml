@@ -1,5 +1,5 @@
 name: Code Analysis using Snyk
-inputs:
+secrets:
   SnykToken:
     description: 'Snyk API Token'
     required: true
