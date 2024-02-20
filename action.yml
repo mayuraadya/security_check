@@ -13,7 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Authenticate Snyk
-        run: npx snyk auth ${{ inputs.SnykToken }}
+        env:
+          SNYK_TOKEN: ${{ inputs.SnykToken }}
+        run: npx snyk auth $SNYK_TOKEN
       - name: Install Snyk Tools
         run: npm install snyk-to-html -g
       - uses: snyk/actions/setup@master
