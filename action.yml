@@ -1,13 +1,13 @@
 name: Code Analysis using Snyk
-secrets:
+inputs:
   SnykToken:
     description: 'Snyk API Token'
     required: true
     default: 'Missing'
-inputs:
   Pipeline_Run:
     description: 'Pipeline Run'
     required: true
+    default: 'snyk-report'
 
 on: 
   push:
