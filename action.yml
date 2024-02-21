@@ -1,10 +1,9 @@
 name: Code Analysis using Snyk
-secrects:
+inputs:
   SnykToken:
     description: 'Snyk API Token'
     required: true
     default: 'Missing'
-inputs:
   Pipeline_Run:
     description: 'Pipeline Run'
     required: true
@@ -17,7 +16,7 @@ runs:
     - name: Authenticate Snyk
       shell: bash
       env:
-        SNYK_TOKEN: ${{ secrets.SnykToken }}
+        SNYK_TOKEN: ${{ inputs.SnykToken }}
       run: npx snyk auth $SNYK_TOKEN
     - name: Install Snyk Tools
       shell: bash
