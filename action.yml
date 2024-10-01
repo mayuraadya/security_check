@@ -17,7 +17,7 @@ runs:
       shell: bash
       env:
         SNYK_TOKEN: ${{ inputs.SnykToken }}
-      run: npx snyk auth $SNYK_TOKEN
+      run: npx snyk configure set endpoint=https://api.eu.snyk.io && npx snyk auth $SNYK_TOKEN
     - name: Install Snyk Tools
       shell: bash
       run: npm install snyk-to-html -g
