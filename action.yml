@@ -19,12 +19,6 @@ runs:
         SNYK_TOKEN: ${{ inputs.SnykToken }}
         SNYK_API: "https://api.eu.snyk.io"
       run: npx snyk auth $SNYK_TOKEN
-#    - name: Run Snyk to check for vulnerabilities
-#      uses: snyk/actions/node@master
-#      env:
-#        SNYK_TOKEN: ${{ inputs.SNYK_TOKEN }}
-#      with:
-#        args: --severity-threshold=high
     - name: Install Snyk Tools
       shell: bash
       run: npm install snyk-to-html -g
