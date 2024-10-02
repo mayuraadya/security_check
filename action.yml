@@ -13,18 +13,18 @@ runs:
   using: 'composite'
   steps:
     - uses: actions/checkout@v4
+    - name: Authenticate Snyk
+      shell: bash
+      env:
+       SNYK_TOKEN: ${{ inputs.SnykToken }}
+        SNYK_API: "https://api.eu.snyk.io"
+      run: npx snyk auth $SNYK_TOKEN
     - name: Run Snyk to check for vulnerabilities
       uses: snyk/actions/node@master
       env:
         SNYK_TOKEN: ${{ inputs.SNYK_TOKEN }}
       with:
         args: --severity-threshold=high
-#    - name: Authenticate Snyk
-#      shell: bash
-#      env:
-#       SNYK_TOKEN: ${{ inputs.SnykToken }}
-#        SNYK_API: "https://api.eu.snyk.io"
-#      run: npx snyk auth $SNYK_TOKEN
 #    - name: Install Snyk Tools
 #      shell: bash
 #      run: npm install snyk-to-html -g
