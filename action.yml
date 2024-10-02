@@ -16,7 +16,7 @@ runs:
     - name: Authenticate Snyk
       shell: bash
       env:
-       SNYK_TOKEN: ${{ inputs.SnykToken }}
+        SNYK_TOKEN: ${{ inputs.SnykToken }}
         SNYK_API: "https://api.eu.snyk.io"
       run: npx snyk auth $SNYK_TOKEN
     - name: Run Snyk to check for vulnerabilities
