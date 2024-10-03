@@ -17,6 +17,7 @@ runs:
       shell: bash
       env:
         SNYK_TOKEN: ${{ inputs.SnykToken }}
+        SNYK_API: "https://api.eu.snyk.io"
       run: npx snyk auth $SNYK_TOKEN
     - name: Install Snyk Tools
       shell: bash
@@ -26,8 +27,8 @@ runs:
       shell: bash
       run: snyk code test
       continue-on-error: true # To make sure that SARIF upload gets called
-#        env:
-#          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      env:
+        SNYK_TOKEN: ${{ inputs.SNYK_TOKEN }}
     - name: Snyk Report
       shell: bash
       run: snyk code test --json | snyk-to-html -o results-code-${{ inputs.Pipeline_Run }}.html
