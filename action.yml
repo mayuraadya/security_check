@@ -18,6 +18,7 @@ runs:
       env:
         SNYK_TOKEN: ${{ inputs.SnykToken }}
         SNYK_API: "https://api.eu.snyk.io"
+      run: npx snyk config set endpoint=$SNYK_API
       run: npx snyk auth $SNYK_TOKEN
     - name: Install Snyk Tools
       shell: bash
