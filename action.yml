@@ -8,7 +8,6 @@ inputs:
     description: "Pipeline Run"
     required: true
     default: "snyk-report"
-
 runs:
   using: "composite"
   steps:
@@ -31,14 +30,11 @@ runs:
     - uses: snyk/actions/setup@master
     - name: Snyk Test
       shell: bash
-      run: snyk code test
-      continue-on-error: true # To make sure that SARIF upload gets called
+      # Changed from 'snyk code test' to the correct command as it's not supported by AppSec team
+      run: snyk test --all-projects -d --json-file-output=vuln.json --severity-threshold=high
+      continue-on-error: true 
       env:
-        SNYK_TOKEN: ${{ inputs.SNYK_TOKEN }}
-    - name: Snyk Report
-      shell: bash
-      run: snyk code test --json | snyk-to-html -o results-code-${{ inputs.Pipeline_Run }}.html
-      continue-on-error: true # To make sure that SARIF upload gets called
+        SNYK_TOKEN: ${{ inputs.SnykToken }}
     - name: Upload Code Scanning Result
       uses: actions/upload-artifact@v4
       with:
